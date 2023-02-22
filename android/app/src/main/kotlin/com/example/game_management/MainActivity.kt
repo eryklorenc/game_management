@@ -1,4 +1,4 @@
-package com.example.game_management
+package com.eryklorenc.game_management
 
 import io.flutter.embedding.android.FlutterActivity
 
