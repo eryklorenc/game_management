@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
 import 'package:game_management/features/auth/user_profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({
@@ -12,14 +13,13 @@ class HomePage extends StatelessWidget {
 
   final User currentUser;
 
-  final usersQuery =
-      FirebaseFirestore.instance.collection('users');
+  final usersQuery = FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Users collection'),
+        title: Text(AppLocalizations.of(context)!.helloWorld),
         actions: [
           IconButton(
             onPressed: () {
