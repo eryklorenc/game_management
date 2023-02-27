@@ -3,80 +3,58 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:game_management/features/auth/user_profile.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({
+class HomePage extends StatefulWidget {
+  const HomePage({
     Key? key,
     required this.currentUser,
   }) : super(key: key);
 
   final User currentUser;
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var currentIndex = 0;
   final usersQuery = FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Twoja pomoc w zarządzaniu grami',
-            style: TextStyle(color: Colors.black)),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const UserProfileScreen(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.person,
-              color: Colors.black,
-            ),
+      body: Builder(builder: (context) {
+        if (currentIndex == 0) {
+          return const Center(child: Text('library'));
+        }
+        if (currentIndex == 0) {
+          return const Center(child: Text('library'));
+        }
+        if (currentIndex == 0) {
+          return const Center(child: Text('library'));
+        }
+        return const Center();
+      }),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (newIndex) {
+          setState(() {
+            currentIndex = newIndex;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.library_add),
+            label: 'Biblioteka',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.store),
+            label: 'Lista życzeń',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
           ),
         ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const UserProfileScreen(),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-              ),
-              child: const Text(
-                'Gry, którymi chcesz zarządzać',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const UserProfileScreen(),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-              ),
-              child: const Text(
-                'Gry, które zamierzasz kupić',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
