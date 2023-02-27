@@ -17,7 +17,7 @@ class UserProfileScreen extends StatelessWidget {
             Navigator.of(context).pop();
           })
         ],
-        avatarSize: 48,
+        avatarSize: 60,
       ),
     );
   }
