@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:game_management/features/home/library_page/game_list.dart';
-import 'package:game_management/features/home/wish_list/most_popular_card.dart';
+import 'package:game_management/features/home/wish_list/most_popular_list.dart';
 
 class WishListPageContent extends StatefulWidget {
   const WishListPageContent({
@@ -20,91 +18,94 @@ class _WishListPageContentState extends State<WishListPageContent> {
         onPressed: () {},
         child: const Icon(Icons.add),
       ),
-      body: Column(
-        children: [
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Your Wish List',
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  const Icon(Icons.favorite)
-                ],
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 5,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Colors.white.withOpacity(0.5),
+              Colors.white.withOpacity(0.1),
+              Colors.black.withOpacity(1),
+            ])),
+        child: Column(
+          children: [
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Your Wish List',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const Icon(Icons.favorite)
+                  ],
+                ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Most Popular',
-                    style: TextStyle(
-                        color: Colors.greenAccent,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: const [
-                      MostPopularCard(
-                        image: AssetImage('assets/game1.jpg'),
+            const MostPopularList(),
+            const SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                const Text(
+                  'Wish List',
+                  style: TextStyle(
+                      color: Colors.greenAccent,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Image(
+                        width: 150,
+                        image: AssetImage('assets/jpg1.jpg'),
                       ),
-                      SizedBox(
-                        width: 16,
+                      const SizedBox(
+                        width: 10,
                       ),
-                      MostPopularCard(
-                        image: AssetImage('assets/game2.jpg'),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      MostPopularCard(
-                        image: AssetImage('assets/game3.jpg'),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      MostPopularCard(
-                        image: AssetImage('assets/game4.jpg'),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      MostPopularCard(
-                        image: AssetImage('assets/game5.jpg'),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: const [
+                            Text(
+                              ('data'),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              ('data'),
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.white54,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Column(
-            children: const [
-              Text(
-                'Wish List',
-                style: TextStyle(
-                    color: Colors.greenAccent,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600),
-              )
-            ],
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
