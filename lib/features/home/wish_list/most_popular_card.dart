@@ -15,7 +15,9 @@ class MostPopularCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const MostPopularView(),
+            builder: (context) => MostPopularView(
+              image: image,
+            ),
           ),
         );
       },

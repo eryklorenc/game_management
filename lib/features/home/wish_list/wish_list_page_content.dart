@@ -32,7 +32,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                     'Your Wish List',
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  const Icon(Icons.heart_broken_sharp)
+                  const Icon(Icons.favorite)
                 ],
               ),
             ),
