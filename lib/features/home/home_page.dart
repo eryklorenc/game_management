@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:game_management/features/auth/user_profile.dart';
 import 'package:game_management/features/home/library_page/library_page_content.dart';
-import 'package:game_management/features/home/wishlist/wishlist_page_content.dart';
+import 'package:game_management/features/home/wish_list/wish_list_page_content.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           return const LibraryPageContent();
         }
         if (currentIndex == 1) {
-          return const WishlistPageContent();
+          return const WishListPageContent();
         }
         if (currentIndex == 2) {
           return const UserProfileScreen();
