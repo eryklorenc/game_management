@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:game_management/features/home/wish_list/most_popular_list.dart';
+import 'package:game_management/features/home/wish_list/wish_list_card.dart';
 
 class WishListPageContent extends StatefulWidget {
   const WishListPageContent({
@@ -10,12 +12,21 @@ class WishListPageContent extends StatefulWidget {
   State<WishListPageContent> createState() => _WishListPageContentState();
 }
 
+final controller = TextEditingController();
+
 class _WishListPageContentState extends State<WishListPageContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          FirebaseFirestore.instance.collection('wishes').add(
+            {
+              'title': controller.text,
+            },
+          );
+          controller.clear();
+        },
         child: const Icon(Icons.add),
       ),
       body: Container(
@@ -30,17 +41,17 @@ class _WishListPageContentState extends State<WishListPageContent> {
               Colors.white.withOpacity(0.1),
               Colors.black.withOpacity(1),
             ])),
-        child: Column(
+        child: ListView(
           children: [
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(30.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Your Wish List',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const Icon(Icons.favorite)
                   ],
@@ -49,61 +60,72 @@ class _WishListPageContentState extends State<WishListPageContent> {
             ),
             const MostPopularList(),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
-            Column(
-              children: [
-                const Text(
-                  'Wish List',
-                  style: TextStyle(
-                      color: Colors.greenAccent,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Image(
-                        width: 150,
-                        image: AssetImage('assets/jpg1.jpg'),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          children: const [
-                            Text(
-                              ('data'),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              ('data'),
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.white54,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream:
+                    FirebaseFirestore.instance.collection('wishes').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Center(child: Text('Something went wrong'));
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: Text('Loading'));
+                  }
+
+                  final documents = snapshot.data!.docs;
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Wish List',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        for (final document in documents) ...[
+                          Dismissible(
+                            key: ValueKey(document.id),
+                            onDismissed: (_) {
+                              FirebaseFirestore.instance
+                                  .collection('wishes')
+                                  .doc(document.id)
+                                  .delete();
+                            },
+                            child: WishListCard(document['title']),
+                          ),
+                        ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: 270,
+                          height: 50,
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 2, color: Colors.greenAccent),
+                              ),
+                              hintText: 'Nazwa gry',
+                              filled: true,
+                              fillColor: Colors.transparent,
+                            ),
+                            controller: controller,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }),
           ],
         ),
       ),

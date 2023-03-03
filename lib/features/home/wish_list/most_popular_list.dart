@@ -19,7 +19,7 @@ class MostPopularList extends StatelessWidget {
             const Text(
               'Most Popular',
               style: TextStyle(
-                  color: Colors.greenAccent,
+                  color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.w600),
             ),
@@ -29,40 +29,56 @@ class MostPopularList extends StatelessWidget {
             Container(
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(.1),
+                  color:
+                      const Color.fromARGB(255, 235, 232, 232).withOpacity(.1),
                   offset: const Offset(1, 1),
                   blurRadius: 42,
                   spreadRadius: 16,
                 ),
               ]),
               child: Row(
-                children: const [
-                  MostPopularCard(
-                    image: AssetImage('assets/game1.jpg'),
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: const MostPopularCard(
+                      image: AssetImage('assets/game1.jpg'),
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  MostPopularCard(
-                    image: AssetImage('assets/game2.jpg'),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: const MostPopularCard(
+                      image: AssetImage('assets/game2.jpg'),
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  MostPopularCard(
-                    image: AssetImage('assets/game3.jpg'),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: const MostPopularCard(
+                      image: AssetImage('assets/game3.jpg'),
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  MostPopularCard(
-                    image: AssetImage('assets/game4.jpg'),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: const MostPopularCard(
+                      image: AssetImage('assets/game4.jpg'),
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  MostPopularCard(
-                    image: AssetImage('assets/game5.jpg'),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: const MostPopularCard(
+                      image: AssetImage('assets/game5.jpg'),
+                    ),
                   ),
                 ],
               ),

@@ -80,7 +80,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                         decoration: const InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 3, color: Colors.greenAccent),
+                                BorderSide(width: 2, color: Colors.greenAccent),
                           ),
                           hintText: 'Nazwa gry',
                           filled: true,
@@ -97,7 +97,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                           fillColor: Colors.transparent,
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 3, color: Colors.greenAccent),
+                                BorderSide(width: 2, color: Colors.greenAccent),
                           ),
                           hintText: 'Ukończona? Nieukończona?',
                         ),
