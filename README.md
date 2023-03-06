@@ -1,14 +1,14 @@
-Game Management
+<h1>Game Management</h1>
 
 The app will help you organize your games
 
 
-Technologies used
+<h2>Technologies used</h2>
 
--Dart
--Flutter
--Bloc/Cubit
--Firebase
+<p><em>-Dart</p></em>
+<p><em>-Flutter</p></em>
+<p><em>-Bloc/Cubit</p></em>
+<p><em>-Firebase</p></em>
 
 
 
