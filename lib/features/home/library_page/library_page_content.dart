@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/features/home/library_page/game_list.dart';
+
+import 'cubit/library_page_cubit.dart';
 
 class LibraryPageContent extends StatefulWidget {
   const LibraryPageContent({
@@ -39,19 +42,22 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream:
-                    FirebaseFirestore.instance.collection('games').snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Center(child: Text('Something went wrong'));
+            child: BlocProvider(
+              create: (context) => LibraryPageCubit()..start(),
+              child: BlocBuilder<LibraryPageCubit, LibraryPageState>(
+                builder: (context, state) {
+                  if (state.errorMessage.isNotEmpty) {
+                    return Center(
+                      child:
+                          Text('Something went wrong: ${state.errorMessage}'),
+                    );
                   }
 
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: Text('Loading'));
+                  if (state.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
                   }
 
-                  final documents = snapshot.data!.docs;
+                  final documents = state.documents;
 
                   return ListView(
                     children: [
@@ -105,7 +111,10 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                       ),
                     ],
                   );
-                }),
+
+                },
+              ),
+            ),
           ),
         ),
       ),

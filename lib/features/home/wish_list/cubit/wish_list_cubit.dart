@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
-part 'library_page_state.dart';
+part 'wish_list_state.dart';
 
-class LibraryPageCubit extends Cubit<LibraryPageState> {
-  LibraryPageCubit()
+class WishListCubit extends Cubit<WishListState> {
+  WishListCubit()
       : super(
-          const LibraryPageState(
+          const WishListState(
             documents: [],
             errorMessage: '',
             isLoading: false,
@@ -20,7 +20,7 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
 
   Future<void> start() async {
     emit(
-      const LibraryPageState(
+      const WishListState(
         documents: [],
         errorMessage: '',
         isLoading: true,
@@ -28,11 +28,11 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
     );
 
     _streamSubscription = FirebaseFirestore.instance
-        .collection('games')
+        .collection('wishes')
         .snapshots()
         .listen((data) {
       emit(
-        LibraryPageState(
+        WishListState(
           documents: data.docs,
           isLoading: false,
           errorMessage: '',
@@ -41,7 +41,7 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
     })
       ..onError((error) {
         emit(
-          LibraryPageState(
+          WishListState(
             documents: const [],
             errorMessage: error.toString(),
             isLoading: false,

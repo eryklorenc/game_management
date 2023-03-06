@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
 import 'package:game_management/features/home/wish_list/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/wish_list_card.dart';
 
@@ -62,70 +64,76 @@ class _WishListPageContentState extends State<WishListPageContent> {
             const SizedBox(
               height: 10,
             ),
-            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream:
-                    FirebaseFirestore.instance.collection('wishes').snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Center(child: Text('Something went wrong'));
+            BlocProvider(
+              create: (context) => WishListCubit()..start(),
+              child: BlocBuilder<WishListCubit, WishListState>(
+                builder: (context, state) {
+                        if (state.errorMessage.isNotEmpty) {
+                    return Center(
+                      child:
+                          Text('Something went wrong: ${state.errorMessage}'),
+                    );
                   }
 
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: Text('Loading'));
+                        if (state.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
                   }
 
-                  final documents = snapshot.data!.docs;
+                        final documents = state.documents;
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Wish List',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        for (final document in documents) ...[
-                          Dismissible(
-                            key: ValueKey(document.id),
-                            onDismissed: (_) {
-                              FirebaseFirestore.instance
-                                  .collection('wishes')
-                                  .doc(document.id)
-                                  .delete();
-                            },
-                            child: WishListCard(document['title']),
-                          ),
-                        ],
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: 270,
-                          height: 50,
-                          child: TextField(
-                            decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 2, color: Colors.greenAccent),
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Wish List',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
                               ),
-                              hintText: 'Nazwa gry',
-                              filled: true,
-                              fillColor: Colors.transparent,
-                            ),
-                            controller: controller,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              for (final document in documents) ...[
+                                Dismissible(
+                                  key: ValueKey(document.id),
+                                  onDismissed: (_) {
+                                    FirebaseFirestore.instance
+                                        .collection('wishes')
+                                        .doc(document.id)
+                                        .delete();
+                                  },
+                                  child: WishListCard(document['title']),
+                                ),
+                              ],
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SizedBox(
+                                width: 270,
+                                height: 50,
+                                child: TextField(
+                                  decoration: const InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 2, color: Colors.greenAccent),
+                                    ),
+                                    hintText: 'Nazwa gry',
+                                    filled: true,
+                                    fillColor: Colors.transparent,
+                                  ),
+                                  controller: controller,
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                  );
-                }),
+                        );
+                      
+                },
+              ),
+            ),
           ],
         ),
       ),

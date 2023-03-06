@@ -1,14 +1,16 @@
-part of 'library_page_cubit.dart';
+part of 'wish_list_cubit.dart';
 
 @immutable
-class LibraryPageState {
+class WishListState {
   final List<QueryDocumentSnapshot<Map<String, dynamic>>> documents;
   final bool isLoading;
   final String errorMessage;
 
-  const LibraryPageState({
+  const WishListState({
     required this.documents,
     required this.isLoading,
     required this.errorMessage,
   });
 }
+
+
