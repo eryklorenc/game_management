@@ -14,25 +14,28 @@ class LibraryPageContent extends StatefulWidget {
   State<LibraryPageContent> createState() => _LibraryPageContentState();
 }
 
+final controller = TextEditingController();
+final controllerstatus = TextEditingController();
+
 class _LibraryPageContentState extends State<LibraryPageContent> {
-  final controller = TextEditingController();
-  final controllerstatus = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          FirebaseFirestore.instance.collection('games').add(
-            {
-              'title': controller.text,
-              'status': controllerstatus.text,
-            },
-          );
-          controller.clear();
-          controllerstatus.clear();
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: BlocProvider(
+        create: (context) => LibraryPageCubit(),
+        child: BlocBuilder<LibraryPageCubit, LibraryPageState>(
+          builder: (context, state) {
+            return FloatingActionButton(
+              onPressed: () {
+                context.read<LibraryPageCubit>().add();
+                controller.clear();
+                controllerstatus.clear();
+              },
+              child: const Icon(Icons.add),
+            );
+          },
+        ),
       ),
       body: SafeArea(
         child: Container(
@@ -111,7 +114,6 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                       ),
                     ],
                   );
-
                 },
               ),
             ),

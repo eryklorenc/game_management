@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:game_management/features/home/wish_list/wish_list_page_content.dart';
 import 'package:meta/meta.dart';
 
 part 'wish_list_state.dart';
@@ -17,6 +18,13 @@ class WishListCubit extends Cubit<WishListState> {
         );
 
   StreamSubscription? _streamSubscription;
+
+  Future<void> add() async {FirebaseFirestore.instance.collection('wishes').add(
+            {
+              'title': controller1.text,
+            },
+          );
+  }
 
   Future<void> start() async {
     emit(

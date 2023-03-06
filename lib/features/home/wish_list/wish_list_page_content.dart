@@ -14,22 +14,25 @@ class WishListPageContent extends StatefulWidget {
   State<WishListPageContent> createState() => _WishListPageContentState();
 }
 
-final controller = TextEditingController();
+final controller1 = TextEditingController();
 
 class _WishListPageContentState extends State<WishListPageContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          FirebaseFirestore.instance.collection('wishes').add(
-            {
-              'title': controller.text,
-            },
-          );
-          controller.clear();
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: BlocProvider(
+        create: (context) => WishListCubit(),
+        child: BlocBuilder<WishListCubit, WishListState>(
+          builder: (context, state) {
+            return FloatingActionButton(
+              onPressed: () {
+                context.read<WishListCubit>().add();
+                controller1.clear();
+              },
+              child: const Icon(Icons.add),
+            );
+          },
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -68,69 +71,68 @@ class _WishListPageContentState extends State<WishListPageContent> {
               create: (context) => WishListCubit()..start(),
               child: BlocBuilder<WishListCubit, WishListState>(
                 builder: (context, state) {
-                        if (state.errorMessage.isNotEmpty) {
+                  if (state.errorMessage.isNotEmpty) {
                     return Center(
                       child:
                           Text('Something went wrong: ${state.errorMessage}'),
                     );
                   }
 
-                        if (state.isLoading) {
+                  if (state.isLoading) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                        final documents = state.documents;
+                  final documents = state.documents;
 
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Wish List',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              for (final document in documents) ...[
-                                Dismissible(
-                                  key: ValueKey(document.id),
-                                  onDismissed: (_) {
-                                    FirebaseFirestore.instance
-                                        .collection('wishes')
-                                        .doc(document.id)
-                                        .delete();
-                                  },
-                                  child: WishListCard(document['title']),
-                                ),
-                              ],
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                width: 270,
-                                height: 50,
-                                child: TextField(
-                                  decoration: const InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2, color: Colors.greenAccent),
-                                    ),
-                                    hintText: 'Nazwa gry',
-                                    filled: true,
-                                    fillColor: Colors.transparent,
-                                  ),
-                                  controller: controller,
-                                ),
-                              )
-                            ],
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Wish List',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        for (final document in documents) ...[
+                          Dismissible(
+                            key: ValueKey(document.id),
+                            onDismissed: (_) {
+                              FirebaseFirestore.instance
+                                  .collection('wishes')
+                                  .doc(document.id)
+                                  .delete();
+                            },
+                            child: WishListCard(document['title']),
                           ),
-                        );
-                      
+                        ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: 270,
+                          height: 50,
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 2, color: Colors.greenAccent),
+                              ),
+                              hintText: 'Nazwa gry',
+                              filled: true,
+                              fillColor: Colors.transparent,
+                            ),
+                            controller: controller1,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
