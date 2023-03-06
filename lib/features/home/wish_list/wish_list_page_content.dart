@@ -82,7 +82,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  final documents = state.documents;
+                  final itemModels = state.items;
 
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -99,16 +99,16 @@ class _WishListPageContentState extends State<WishListPageContent> {
                         const SizedBox(
                           height: 15,
                         ),
-                        for (final document in documents) ...[
+                        for (final itemModel in itemModels) ...[
                           Dismissible(
-                            key: ValueKey(document.id),
+                            key: ValueKey(itemModel.id),
                             onDismissed: (_) {
                               FirebaseFirestore.instance
                                   .collection('wishes')
-                                  .doc(document.id)
+                                  .doc(itemModel.id)
                                   .delete();
                             },
-                            child: WishListCard(document['title']),
+                            child: WishListCard(itemModel.title),
                           ),
                         ],
                         const SizedBox(

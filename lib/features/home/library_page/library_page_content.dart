@@ -60,22 +60,22 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  final documents = state.documents;
+                  final itemModels = state.items;
 
                   return ListView(
                     children: [
-                      for (final document in documents) ...[
+                      for (final itemModel in itemModels) ...[
                         Dismissible(
-                          key: ValueKey(document.id),
+                          key: ValueKey(itemModel.id),
                           onDismissed: (_) {
                             FirebaseFirestore.instance
                                 .collection('games')
-                                .doc(document.id)
+                                .doc(itemModel.id)
                                 .delete();
                           },
                           child: GameList(
-                            document['title'],
-                            document['status'],
+                            itemModel.title,
+                            itemModel.status,
                           ),
                         ),
                         const SizedBox(

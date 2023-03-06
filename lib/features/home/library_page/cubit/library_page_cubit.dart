@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/features/home/library_page/library_page_content.dart';
+import 'package:game_management/models/item_model_library.dart';
 import 'package:meta/meta.dart';
 
 part 'library_page_state.dart';
@@ -10,14 +11,13 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
   LibraryPageCubit()
       : super(
           const LibraryPageState(
-            documents: [],
+            items: [],
             errorMessage: '',
             isLoading: false,
           ),
         );
 
   StreamSubscription? _streamSubscription;
-
 
   Future<void> add() async {
     FirebaseFirestore.instance.collection('games').add(
@@ -31,7 +31,7 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
   Future<void> start() async {
     emit(
       const LibraryPageState(
-        documents: [],
+        items: [],
         errorMessage: '',
         isLoading: true,
       ),
@@ -40,10 +40,18 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
     _streamSubscription = FirebaseFirestore.instance
         .collection('games')
         .snapshots()
-        .listen((data) {
+        .listen((items) {
+      final itemModels = items.docs.map((doc) {
+        return ItemModelLibrary(
+          id: doc.id,
+          title: doc['title'],
+          status: doc['status'],
+        );
+      }).toList();
+
       emit(
         LibraryPageState(
-          documents: data.docs,
+          items: itemModels,
           isLoading: false,
           errorMessage: '',
         ),
@@ -52,7 +60,7 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
       ..onError((error) {
         emit(
           LibraryPageState(
-            documents: const [],
+            items: const [],
             errorMessage: error.toString(),
             isLoading: false,
           ),
