@@ -1,16 +1,20 @@
-# game_management
+<h1>Game Management</h1>
 
-A new Flutter project.
+The app will help you organize your games
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<h2>Technologies used</h2>
 
-A few resources to get you started if this is your first Flutter project:
+<p><em>-Dart</p></em>
+<p><em>-Flutter</p></em>
+<p><em>-Bloc/Cubit</p></em>
+<p><em>-Firebase</p></em>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+![Zrzut ekranu (47)](https://user-images.githubusercontent.com/119433777/223276115-2eac74a8-4699-45f9-b02b-9b4957e0f0fc.png)
+![Zrzut ekranu (48)](https://user-images.githubusercontent.com/119433777/223276126-9397a1b3-4630-46a7-b7ca-ea0bda0b35d5.png)
+![Zrzut ekranu (49)](https://user-images.githubusercontent.com/119433777/223276128-e96783c3-d983-4d7a-9c6b-d7e3c2e23dfd.png)
+![Zrzut ekranu (50)](https://user-images.githubusercontent.com/119433777/223276132-f0329890-101a-41c7-a5c0-e15ab90e13e6.png)
+![Zrzut ekranu (53)](https://user-images.githubusercontent.com/119433777/223276138-86da1681-1913-41db-8658-52d59c824ef7.png)
+
