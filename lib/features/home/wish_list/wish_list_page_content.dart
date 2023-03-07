@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
 import 'package:game_management/features/home/wish_list/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/wish_list_card.dart';
+import 'package:game_management/repositories/items_repository_wish_list.dart';
 
 class WishListPageContent extends StatefulWidget {
   const WishListPageContent({
@@ -21,7 +21,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: BlocProvider(
-        create: (context) => WishListCubit(),
+        create: (context) => WishListCubit(ItemsRepositoryWishList()),
         child: BlocBuilder<WishListCubit, WishListState>(
           builder: (context, state) {
             return FloatingActionButton(
@@ -68,7 +68,8 @@ class _WishListPageContentState extends State<WishListPageContent> {
               height: 10,
             ),
             BlocProvider(
-              create: (context) => WishListCubit()..start(),
+              create: (context) =>
+                  WishListCubit(ItemsRepositoryWishList())..start(),
               child: BlocBuilder<WishListCubit, WishListState>(
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
@@ -103,10 +104,9 @@ class _WishListPageContentState extends State<WishListPageContent> {
                           Dismissible(
                             key: ValueKey(itemModel.id),
                             onDismissed: (_) {
-                              FirebaseFirestore.instance
-                                  .collection('wishes')
-                                  .doc(itemModel.id)
-                                  .delete();
+                              context
+                                  .read<WishListCubit>()
+                                  .delete(itemModelID: itemModel.id);
                             },
                             child: WishListCard(itemModel.title),
                           ),
@@ -123,7 +123,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                                 borderSide: BorderSide(
                                     width: 2, color: Colors.greenAccent),
                               ),
-                              hintText: 'Nazwa gry',
+                              hintText: 'Game name',
                               filled: true,
                               fillColor: Colors.transparent,
                             ),

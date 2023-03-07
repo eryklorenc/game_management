@@ -46,15 +46,15 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.library_add),
-            label: 'Biblioteka',
+            label: 'Library',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.store),
-            label: 'Lista życzeń',
+            label: 'Wish List',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profil',
+            label: 'Profile',
           ),
         ],
       ),
