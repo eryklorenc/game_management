@@ -1,61 +1,61 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:game_management/features/home/wish_list/wish_list_page_content.dart';
+import 'package:game_management/models/item_model_wish_list.dart';
+import 'package:game_management/repositories/items_repository_wish_list.dart';
 import 'package:meta/meta.dart';
 
 part 'wish_list_state.dart';
 
 class WishListCubit extends Cubit<WishListState> {
-  WishListCubit()
+  WishListCubit(this._itemsRepositoryWishList)
       : super(
           const WishListState(
-            documents: [],
+            items: [],
             errorMessage: '',
             isLoading: false,
           ),
         );
 
+  final ItemsRepositoryWishList _itemsRepositoryWishList;
+
   StreamSubscription? _streamSubscription;
 
-  Future<void> add() async {FirebaseFirestore.instance.collection('wishes').add(
-            {
-              'title': controller1.text,
-            },
-          );
+  Future<void> delete({required itemModelID}) async {
+    await _itemsRepositoryWishList.delete(id: itemModelID);
+  }
+
+  Future<void> add() async {
+    await _itemsRepositoryWishList.add();
   }
 
   Future<void> start() async {
     emit(
       const WishListState(
-        documents: [],
+        items: [],
         errorMessage: '',
         isLoading: true,
       ),
     );
 
-    _streamSubscription = FirebaseFirestore.instance
-        .collection('wishes')
-        .snapshots()
-        .listen((data) {
+    _streamSubscription =
+        _itemsRepositoryWishList.getItemsStream().listen((items) {
       emit(
         WishListState(
-          documents: data.docs,
+          items: items,
           isLoading: false,
           errorMessage: '',
         ),
       );
     })
-      ..onError((error) {
-        emit(
-          WishListState(
-            documents: const [],
-            errorMessage: error.toString(),
-            isLoading: false,
-          ),
-        );
-      });
+          ..onError((error) {
+            emit(
+              WishListState(
+                items: const [],
+                errorMessage: error.toString(),
+                isLoading: false,
+              ),
+            );
+          });
   }
 
   @override

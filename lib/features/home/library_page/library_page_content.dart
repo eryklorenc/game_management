@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/features/home/library_page/game_list.dart';
+import 'package:game_management/repositories/items_repository_library.dart';
 
 import 'cubit/library_page_cubit.dart';
 
@@ -23,7 +23,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       floatingActionButton: BlocProvider(
-        create: (context) => LibraryPageCubit(),
+        create: (context) => LibraryPageCubit(ItemsRepositoryLibrary()),
         child: BlocBuilder<LibraryPageCubit, LibraryPageState>(
           builder: (context, state) {
             return FloatingActionButton(
@@ -46,7 +46,8 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlocProvider(
-              create: (context) => LibraryPageCubit()..start(),
+              create: (context) =>
+                  LibraryPageCubit(ItemsRepositoryLibrary())..start(),
               child: BlocBuilder<LibraryPageCubit, LibraryPageState>(
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
@@ -60,22 +61,21 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  final documents = state.documents;
+                  final itemModels = state.items;
 
                   return ListView(
                     children: [
-                      for (final document in documents) ...[
+                      for (final itemModel in itemModels) ...[
                         Dismissible(
-                          key: ValueKey(document.id),
+                          key: ValueKey(itemModel.id),
                           onDismissed: (_) {
-                            FirebaseFirestore.instance
-                                .collection('games')
-                                .doc(document.id)
-                                .delete();
+                            context
+                                .read<LibraryPageCubit>()
+                                .delete(itemModelID: itemModel.id);
                           },
                           child: GameList(
-                            document['title'],
-                            document['status'],
+                            itemModel.title,
+                            itemModel.status,
                           ),
                         ),
                         const SizedBox(
@@ -91,7 +91,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                             borderSide:
                                 BorderSide(width: 2, color: Colors.greenAccent),
                           ),
-                          hintText: 'Nazwa gry',
+                          hintText: 'Game name',
                           filled: true,
                           fillColor: Colors.transparent,
                         ),
@@ -108,7 +108,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                             borderSide:
                                 BorderSide(width: 2, color: Colors.greenAccent),
                           ),
-                          hintText: 'Ukończona? Nieukończona?',
+                          hintText: 'Finished? Not finished?',
                         ),
                         controller: controllerstatus,
                       ),

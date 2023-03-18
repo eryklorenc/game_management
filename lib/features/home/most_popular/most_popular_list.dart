@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_management/features/home/wish_list/most_popular_card.dart';
+import 'package:game_management/features/home/most_popular/most_popular_card.dart';
 
 class MostPopularList extends StatelessWidget {
   const MostPopularList({
