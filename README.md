@@ -1,16 +1,18 @@
-# game_management
+<h1>Game Management</h1>
 
-A new Flutter project.
+The app will help you organize your games
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<h2>Technologies used</h2>
 
-A few resources to get you started if this is your first Flutter project:
+<p><em>-Dart</p></em>
+<p><em>-Flutter</p></em>
+<p><em>-Bloc/Cubit</p></em>
+<p><em>-Firebase</p></em>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Zrzut ekranu (53)](https://user-images.githubusercontent.com/119433777/223503100-34c554a1-2ae7-4647-a750-c86dcf3533ba.png)
+![Zrzut ekranu (56)](https://user-images.githubusercontent.com/119433777/223503146-ef2bda86-d535-4b53-bc2b-b4cf24879a87.png)
+![Zrzut ekranu (49)](https://user-images.githubusercontent.com/119433777/223276128-e96783c3-d983-4d7a-9c6b-d7e3c2e23dfd.png)
+![Zrzut ekranu (50)](https://user-images.githubusercontent.com/119433777/223276132-f0329890-101a-41c7-a5c0-e15ab90e13e6.png)
+![Zrzut ekranu (53)](https://user-images.githubusercontent.com/119433777/223276138-86da1681-1913-41db-8658-52d59c824ef7.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
