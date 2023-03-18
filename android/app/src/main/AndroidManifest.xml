@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.eryklorenc.game_management">
-=======
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.name">
-
->>>>>>> 49c84627f4a9809ca1b861f769f8d2605f453ab5
    <application
         android:label="game_management"
         android:name="${applicationName}"
