@@ -68,9 +68,10 @@ class _WishListPageContentState extends State<WishListPageContent> {
               ),
             ),
             BlocProvider(
-              create: (context) =>
-                  MostPopularCubit(ItemsRepositoryMostPopular(MostPopularRemoteDataSource()))..getItemModelMostPopular(),
-              child: BlocListener<MostPopularCubit, MostPopularState>(
+              create: (context) => MostPopularCubit(
+                  ItemsRepositoryMostPopular(MostPopularRemoteDataSource()))
+                ..getItemModelMostPopular(),
+              child: BlocConsumer<MostPopularCubit, MostPopularState>(
                 listener: (context, state) {
                   if (state.status == Status.error) {
                     final errorMessage = state.errorMessage ?? 'Unkown error';
@@ -82,20 +83,18 @@ class _WishListPageContentState extends State<WishListPageContent> {
                     );
                   }
                 },
-                child: BlocBuilder<MostPopularCubit, MostPopularState>(
-                  builder: (context, state) {
-                    final itemModelMostPopular = state.model;
+                builder: (context, state) {
+                  final itemModelMostPopular = state.model;
 
-                    return Column(
-                      children: [
-                        if (itemModelMostPopular != null)
-                          MostPopularList(
-                            itemModelMostPopular: itemModelMostPopular,
-                          ),
-                      ],
-                    );
-                  },
-                ),
+                  return Column(
+                    children: [
+                      if (itemModelMostPopular != null)
+                        MostPopularList(
+                          itemModelMostPopular: itemModelMostPopular,
+                        ),
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(
