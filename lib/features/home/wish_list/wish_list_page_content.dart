@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_management/app/core/enums.dart';
+import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/features/home/most_popular/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
 import 'package:game_management/features/home/wish_list/wish_list_card.dart';
+import 'package:game_management/repositories/items_repository_most_popular.dart';
 import 'package:game_management/repositories/items_repository_wish_list.dart';
 
 class WishListPageContent extends StatefulWidget {
@@ -63,7 +66,37 @@ class _WishListPageContentState extends State<WishListPageContent> {
                 ),
               ),
             ),
-            const MostPopularList(),
+            BlocProvider(
+              create: (context) =>
+                  MostPopularCubit(ItemsRepositoryMostPopular())..getItemModelMostPopular(),
+              child: BlocListener<MostPopularCubit, MostPopularState>(
+                listener: (context, state) {
+                  if (state.status == Status.error) {
+                    final errorMessage = state.errorMessage ?? 'Unkown error';
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(errorMessage),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                },
+                child: BlocBuilder<MostPopularCubit, MostPopularState>(
+                  builder: (context, state) {
+                    final itemModelMostPopular = state.model;
+
+                    return Column(
+                      children: [
+                        if (itemModelMostPopular != null)
+                          MostPopularList(
+                            itemModelMostPopular: itemModelMostPopular,
+                          ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
