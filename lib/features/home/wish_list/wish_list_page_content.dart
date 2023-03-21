@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/app/core/enums.dart';
+import 'package:game_management/data/remote_data_sources/most_popular_remote_data_sources.dart';
 import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/features/home/most_popular/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
@@ -68,7 +69,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
             ),
             BlocProvider(
               create: (context) =>
-                  MostPopularCubit(ItemsRepositoryMostPopular())..getItemModelMostPopular(),
+                  MostPopularCubit(ItemsRepositoryMostPopular(MostPopularRemoteDataSource()))..getItemModelMostPopular(),
               child: BlocListener<MostPopularCubit, MostPopularState>(
                 listener: (context, state) {
                   if (state.status == Status.error) {
