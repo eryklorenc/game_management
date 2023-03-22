@@ -1,11 +1,16 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:game_management/models/item_model_wish_list.dart';
-import 'package:game_management/repositories/items_repository_wish_list.dart';
-import 'package:meta/meta.dart';
+import 'package:game_management/repositories/items_repository.dart';
+import 'package:injectable/injectable.dart';
 
 part 'wish_list_state.dart';
 
+
+part 'wish_list_cubit.freezed.dart';
+
+@injectable
 class WishListCubit extends Cubit<WishListState> {
   WishListCubit(this._itemsRepositoryWishList)
       : super(
@@ -16,16 +21,16 @@ class WishListCubit extends Cubit<WishListState> {
           ),
         );
 
-  final ItemsRepositoryWishList _itemsRepositoryWishList;
+  final ItemsRepository _itemsRepositoryWishList;
 
   StreamSubscription? _streamSubscription;
 
-  Future<void> delete({required itemModelID}) async {
-    await _itemsRepositoryWishList.delete(id: itemModelID);
+  Future<void> deleteWishList({required itemModelID}) async {
+    await _itemsRepositoryWishList.deleteWishList(id: itemModelID);
   }
 
-  Future<void> add() async {
-    await _itemsRepositoryWishList.add();
+  Future<void> addWishList() async {
+    await _itemsRepositoryWishList.addWishList();
   }
 
   Future<void> start() async {
@@ -38,7 +43,7 @@ class WishListCubit extends Cubit<WishListState> {
     );
 
     _streamSubscription =
-        _itemsRepositoryWishList.getItemsStream().listen((items) {
+        _itemsRepositoryWishList.getItemsWishListStream().listen((items) {
       emit(
         WishListState(
           items: items,

@@ -1,11 +1,16 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:game_management/models/item_model_library.dart';
-import 'package:game_management/repositories/items_repository_library.dart';
-import 'package:meta/meta.dart';
+import 'package:game_management/repositories/items_repository.dart';
+import 'package:injectable/injectable.dart';
 
 part 'library_page_state.dart';
 
+part 'library_page_cubit.freezed.dart';
+
+
+@injectable
 class LibraryPageCubit extends Cubit<LibraryPageState> {
   LibraryPageCubit(this._itemsRepositoryLibrary)
       : super(
@@ -16,16 +21,16 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
           ),
         );
 
-  final ItemsRepositoryLibrary _itemsRepositoryLibrary;
+  final ItemsRepository _itemsRepositoryLibrary;
 
   StreamSubscription? _streamSubscription;
 
-  Future<void> delete({required itemModelID}) async {
-    await _itemsRepositoryLibrary.delete(id: itemModelID);
+  Future<void> deleteLibrary({required itemModelID}) async {
+    await _itemsRepositoryLibrary.deleteLibrary(id: itemModelID);
   }
 
   Future<void> add() async {
-    await _itemsRepositoryLibrary.add();
+    await _itemsRepositoryLibrary.addLibrary();
   }
 
   Future<void> start() async {
@@ -38,7 +43,7 @@ class LibraryPageCubit extends Cubit<LibraryPageState> {
     );
 
     _streamSubscription =
-        _itemsRepositoryLibrary.getItemsStream().listen((items) {
+        _itemsRepositoryLibrary.getItemsLibraryStream().listen((items) {
       emit(
         LibraryPageState(
           items: items,

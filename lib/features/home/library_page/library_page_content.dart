@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_management/app/core/injection_container.dart';
 import 'package:game_management/features/home/library_page/game_list.dart';
-import 'package:game_management/repositories/items_repository_library.dart';
-
 import 'cubit/library_page_cubit.dart';
 
 class LibraryPageContent extends StatefulWidget {
@@ -23,7 +22,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       floatingActionButton: BlocProvider(
-        create: (context) => LibraryPageCubit(ItemsRepositoryLibrary()),
+        create: (context) => getIt<LibraryPageCubit>(),
         child: BlocBuilder<LibraryPageCubit, LibraryPageState>(
           builder: (context, state) {
             return FloatingActionButton(
@@ -46,8 +45,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: BlocProvider(
-              create: (context) =>
-                  LibraryPageCubit(ItemsRepositoryLibrary())..start(),
+              create: (context) => getIt<LibraryPageCubit>()..start(),
               child: BlocBuilder<LibraryPageCubit, LibraryPageState>(
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
@@ -71,7 +69,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                           onDismissed: (_) {
                             context
                                 .read<LibraryPageCubit>()
-                                .delete(itemModelID: itemModel.id);
+                                .deleteLibrary(itemModelID: itemModel.id);
                           },
                           child: GameList(
                             itemModel.title,

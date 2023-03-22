@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:game_management/features/home/library_page/library_page_content.dart';
-import 'package:game_management/models/item_model_library.dart';
+import 'package:game_management/features/home/wish_list/wish_list_page_content.dart';
+import 'package:game_management/models/item_model_wish_list.dart';
+import 'package:injectable/injectable.dart';
 
-class ItemsRepositoryLibrary {
-  Stream<List<ItemModelLibrary>> getItemsStream() {
+
+
+@injectable
+class ItemsWishListRemoteDataSource{
+Stream<List<ItemModelWishList>> getItemsWishListStream() {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
       throw Exception('User is not logged in');
@@ -12,22 +16,21 @@ class ItemsRepositoryLibrary {
     return FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
-        .collection('games')
+        .collection('wishes')
         .snapshots()
         .map((querySnapshot) {
       return querySnapshot.docs.map(
         (doc) {
-          return ItemModelLibrary(
+          return ItemModelWishList(
             id: doc.id,
             title: doc['title'],
-            status: doc['status'],
           );
         },
       ).toList();
     });
   }
 
-  Future<void> add() async {
+  Future<void> addWishList() async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
       throw Exception('User is not logged in');
@@ -35,16 +38,15 @@ class ItemsRepositoryLibrary {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
-        .collection('games')
+        .collection('wishes')
         .add(
       {
-        'title': controller.text,
-        'status': controllerstatus.text,
+        'title': controller1.text,
       },
     );
   }
 
-  Future<void> delete({required String id}) {
+  Future<void> deleteWishList({required String id}) {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
       throw Exception('User is not logged in');
@@ -52,8 +54,10 @@ class ItemsRepositoryLibrary {
     return FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
-        .collection('games')
+        .collection('wishes')
         .doc(id)
         .delete();
   }
 }
+
+

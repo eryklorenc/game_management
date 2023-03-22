@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/app/core/enums.dart';
-import 'package:game_management/data/remote_data_sources/most_popular_remote_data_sources.dart';
+import 'package:game_management/app/core/injection_container.dart';
 import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/features/home/most_popular/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
 import 'package:game_management/features/home/wish_list/wish_list_card.dart';
-import 'package:game_management/repositories/items_repository_most_popular.dart';
-import 'package:game_management/repositories/items_repository_wish_list.dart';
-
 class WishListPageContent extends StatefulWidget {
   const WishListPageContent({
     super.key,
@@ -25,12 +22,12 @@ class _WishListPageContentState extends State<WishListPageContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: BlocProvider(
-        create: (context) => WishListCubit(ItemsRepositoryWishList()),
+        create: (context) => getIt<WishListCubit>(),
         child: BlocBuilder<WishListCubit, WishListState>(
           builder: (context, state) {
             return FloatingActionButton(
               onPressed: () {
-                context.read<WishListCubit>().add();
+                context.read<WishListCubit>().addWishList();
                 controller1.clear();
               },
               child: const Icon(Icons.add),
@@ -68,8 +65,8 @@ class _WishListPageContentState extends State<WishListPageContent> {
               ),
             ),
             BlocProvider(
-              create: (context) => MostPopularCubit(
-                  ItemsRepositoryMostPopular(MostPopularRemoteDataSource()))
+              create: (context) => getIt<MostPopularCubit>(
+                 )
                 ..getItemModelMostPopular(),
               child: BlocConsumer<MostPopularCubit, MostPopularState>(
                 listener: (context, state) {
@@ -101,8 +98,8 @@ class _WishListPageContentState extends State<WishListPageContent> {
               height: 10,
             ),
             BlocProvider(
-              create: (context) =>
-                  WishListCubit(ItemsRepositoryWishList())..start(),
+              create: (context) => getIt<WishListCubit>()
+                ..start(),
               child: BlocBuilder<WishListCubit, WishListState>(
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
@@ -139,7 +136,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                             onDismissed: (_) {
                               context
                                   .read<WishListCubit>()
-                                  .delete(itemModelID: itemModel.id);
+                                  .deleteWishList(itemModelID: itemModel.id);
                             },
                             child: WishListCard(itemModel.title),
                           ),

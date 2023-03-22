@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_management/data/remote_data_sources/most_popular_remote_data_sources.dart';
+import 'package:game_management/app/core/injection_container.dart';
 import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/models/item_model_most_popular.dart';
-import 'package:game_management/repositories/items_repository_most_popular.dart';
 
 class MostPopularView extends StatelessWidget {
   const MostPopularView({
@@ -17,8 +16,7 @@ class MostPopularView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (context) => MostPopularCubit(
-            ItemsRepositoryMostPopular(MostPopularRemoteDataSource()))
+        create: (context) => getIt<MostPopularCubit>()
           ..getItemModelMostPopular(),
         child: BlocBuilder<MostPopularCubit, MostPopularState>(
             builder: (context, state) {

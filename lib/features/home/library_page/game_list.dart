@@ -20,7 +20,7 @@ class GameList extends StatelessWidget {
           child: SizedBox.fromSize(
             size: const Size.fromRadius(48),
             child: const Image(
-                image: AssetImage('assets/game4.jpg'), fit: BoxFit.cover),
+                image: AssetImage('assets/controller1.jpg'), fit: BoxFit.cover),
           ),
         ),
         const SizedBox(

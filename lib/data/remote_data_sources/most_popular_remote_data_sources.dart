@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+
+@injectable
 class MostPopularRemoteDataSource {
   Future<Map<String, dynamic>?> getDataMostPopular() async {
     try {
