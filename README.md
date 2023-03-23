@@ -9,6 +9,11 @@ The app will help you organize your games
 <p><em>-Flutter</p></em>
 <p><em>-Bloc/Cubit</p></em>
 <p><em>-Firebase</p></em>
+<p><em>-Dio</p></em>
+<p><em>-Rest API</p></em>
+<p><em>-Code generators e.g. Freezed, Get It, Injectable</p></em>
+
+
 
 ![Zrzut ekranu (53)](https://user-images.githubusercontent.com/119433777/223503100-34c554a1-2ae7-4647-a750-c86dcf3533ba.png)
 ![Zrzut ekranu (56)](https://user-images.githubusercontent.com/119433777/223503146-ef2bda86-d535-4b53-bc2b-b4cf24879a87.png)
