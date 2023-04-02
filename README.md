@@ -19,5 +19,4 @@ The app will help you organize your games
 ![Zrzut ekranu (56)](https://user-images.githubusercontent.com/119433777/223503146-ef2bda86-d535-4b53-bc2b-b4cf24879a87.png)
 ![Zrzut ekranu (49)](https://user-images.githubusercontent.com/119433777/223276128-e96783c3-d983-4d7a-9c6b-d7e3c2e23dfd.png)
 ![Zrzut ekranu (50)](https://user-images.githubusercontent.com/119433777/223276132-f0329890-101a-41c7-a5c0-e15ab90e13e6.png)
-![Zrzut ekranu (53)](https://user-images.githubusercontent.com/119433777/223276138-86da1681-1913-41db-8658-52d59c824ef7.png)
-
+![Zrzut ekranu (66)](https://user-images.githubusercontent.com/119433777/229384136-16cea683-0e19-4215-85a4-cf36c92cc893.png)
