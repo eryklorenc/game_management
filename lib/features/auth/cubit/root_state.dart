@@ -8,16 +8,3 @@ class RootState with _$RootState {
     @Default('') String errorMessage,
   }) = _RootState;
 }
-
-
-//class RootState {
-  //final User? user;
-  //final bool isLoading;
-  //final String errorMessage;
-
-  //const RootState({
-    //required this.user,
-    //required this.isLoading,
-    //required this.errorMessage,
-  //});
-//}

@@ -9,14 +9,4 @@ class LibraryPageState with _$LibraryPageState {
   }) = _LibraryPageState;
 }
 
-//class LibraryPageState {
- // final List<ItemModelLibrary> items;
-  //final bool isLoading;
-  //final String errorMessage;
 
-  //const LibraryPageState({
-    //required this.items,
-   // required this.isLoading,
-   // required this.errorMessage,
-  //});
-//}

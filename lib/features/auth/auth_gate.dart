@@ -15,14 +15,38 @@ class AuthGate extends StatelessWidget {
         builder: (context, state) {
           final user = state.user;
           if (user == null) {
-            return const SignInScreen(
-              providerConfigs: [
-                EmailProviderConfiguration(),
-              ],
-            );
+            return SignInScreen(
+                providerConfigs: const [
+                  EmailProviderConfiguration(),
+                ],
+                headerBuilder: (context, constraints, _) {
+                  return const Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Welcome!',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30,
+                            color: Color.fromARGB(255, 199, 194, 194),
+                          ),
+                        ),
+                        Icon(
+                          Icons.handshake_outlined,
+                          color: Color.fromARGB(255, 199, 194, 194),
+                        )
+                      ],
+                    ),
+                  );
+                },
+                footerBuilder: (context, action) {
+                  return const Image(
+                    image: AssetImage('assets/logoGame.png'),
+                  );
+                });
           }
           return HomePage(currentUser: user);
-          
         },
       ),
     );
