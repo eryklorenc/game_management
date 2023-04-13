@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:game_management/app/core/enums.dart';
 import 'package:game_management/models/item_model_most_popular.dart';
-import 'package:game_management/repositories/items_repository_most_popular.dart';
+import 'package:game_management/repositories/items_repository.dart';
 import 'package:injectable/injectable.dart';
 
 part 'most_popular_state.dart';
@@ -17,7 +17,7 @@ class MostPopularCubit extends Cubit<MostPopularState> {
           const MostPopularState(),
         );
 
-  final ItemsRepositoryMostPopular _itemsRepositoryMostPopular;
+  final ItemsRepository _itemsRepositoryMostPopular;
 
   Future<void> getItemModelMostPopular() async {
     emit(

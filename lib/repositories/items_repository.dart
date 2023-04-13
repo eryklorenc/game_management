@@ -1,18 +1,22 @@
 import 'package:game_management/data/remote_data_sources/items_library_remote_data_sources.dart';
 import 'package:game_management/data/remote_data_sources/items_wish_list_remote_data_sources.dart';
+import 'package:game_management/data/remote_data_sources/most_popular_remote_data_sources.dart';
 import 'package:game_management/models/item_model_library.dart';
+import 'package:game_management/models/item_model_most_popular.dart';
 import 'package:game_management/models/item_model_wish_list.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class ItemsRepository {
   ItemsRepository({
-    required  this.itemsLibraryRemoteDataSource,
-   required this.itemsWishListRemoteDataSource,
+    required this.itemsLibraryRemoteDataSource,
+    required this.itemsWishListRemoteDataSource,
+    required this.mostPopularRemoteDataSource,
   });
 
   final ItemsLibraryRemoteDataSource itemsLibraryRemoteDataSource;
   final ItemsWishListRemoteDataSource itemsWishListRemoteDataSource;
+  final MostPopularRemoteRetrofitDataSource mostPopularRemoteDataSource;
 
   Stream<List<ItemModelLibrary>> getItemsLibraryStream() {
     return itemsLibraryRemoteDataSource.getItemsLibraryStream();
@@ -36,5 +40,9 @@ class ItemsRepository {
 
   Future<void> deleteWishList({required String id}) {
     return itemsWishListRemoteDataSource.deleteWishList(id: id);
+  }
+
+  Future<ItemModelMostPopular?> getItemModelMostPopular() async {
+    return mostPopularRemoteDataSource.getDataMostPopular();
   }
 }
