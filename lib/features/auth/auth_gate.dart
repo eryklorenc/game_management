@@ -15,36 +15,63 @@ class AuthGate extends StatelessWidget {
         builder: (context, state) {
           final user = state.user;
           if (user == null) {
-            return SignInScreen(
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                colorScheme: const ColorScheme.dark(
+                  primary: Colors.greenAccent,
+                ),
+                inputDecorationTheme: InputDecorationTheme(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.greenAccent),
+                  ),
+                ),
+                outlinedButtonTheme: OutlinedButtonThemeData(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.all(24),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.greenAccent),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                  ),
+                ),
+              ),
+              home: SignInScreen(
                 providerConfigs: const [
                   EmailProviderConfiguration(),
                 ],
                 headerBuilder: (context, constraints, _) {
-                  return const Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Welcome!',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 30,
-                            color: Color.fromARGB(255, 199, 194, 194),
+                  return const SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 30.0, top: 60),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Welcome to',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 25,
+                                color: Colors.white),
                           ),
-                        ),
-                        Icon(
-                          Icons.handshake_outlined,
-                          color: Color.fromARGB(255, 199, 194, 194),
-                        )
-                      ],
+                          Text(
+                            'GameManagement®',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
-                footerBuilder: (context, action) {
-                  return const Image(
-                    image: AssetImage('assets/logoGame.png'),
-                  );
-                });
+              ),
+            );
           }
           return HomePage(currentUser: user);
         },
