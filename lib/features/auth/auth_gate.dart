@@ -44,13 +44,13 @@ class AuthGate extends StatelessWidget {
                   EmailProviderConfiguration(),
                 ],
                 headerBuilder: (context, constraints, _) {
-                  return const SingleChildScrollView(
+                  return  SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 60),
+                      padding: const EdgeInsets.only(left: 30.0, top: 60),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
+                        children: const [
                           Text(
                             'Welcome to',
                             style: TextStyle(
