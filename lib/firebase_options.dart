@@ -50,6 +50,7 @@ class DefaultFirebaseOptions {
     projectId: 'gamemanagement1120',
     authDomain: 'gamemanagement1120.firebaseapp.com',
     storageBucket: 'gamemanagement1120.appspot.com',
+    measurementId: 'G-VMQNS073J2',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

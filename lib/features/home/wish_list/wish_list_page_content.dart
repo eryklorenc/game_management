@@ -159,7 +159,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                             ),
                             controller: controller1,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   );
