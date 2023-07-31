@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:game_management/app/core/injection_container.dart';
 import 'package:game_management/features/auth/cubit/root_cubit.dart';
 import 'package:game_management/features/home/home_page.dart';
 
@@ -10,7 +11,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RootCubit()..start(),
+      create: (context) => getIt<RootCubit>(),
       child: BlocBuilder<RootCubit, RootState>(
         builder: (context, state) {
           final user = state.user;
@@ -44,13 +45,13 @@ class AuthGate extends StatelessWidget {
                   EmailProviderConfiguration(),
                 ],
                 headerBuilder: (context, constraints, _) {
-                  return  SingleChildScrollView(
+                  return const SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 30.0, top: 60),
+                      padding: EdgeInsets.only(left: 30.0, top: 60),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
+                        children: [
                           Text(
                             'Welcome to',
                             style: TextStyle(
