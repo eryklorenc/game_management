@@ -41,7 +41,9 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/wallpaper8.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/wallpaper8.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -87,8 +89,10 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                       TextField(
                         decoration: const InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: AppColors.primary),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: AppColors.primary,
+                            ),
                           ),
                           hintText: 'Game name',
                           filled: true,
@@ -104,8 +108,10 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                           filled: true,
                           fillColor: Colors.transparent,
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 2, color: AppColors.primary),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: AppColors.primary,
+                            ),
                           ),
                           hintText: 'Finished? Not finished?',
                         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/app/core/theme/app_colors.dart';
+import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
 import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/features/home/most_popular/most_popular_card.dart';
 import 'package:game_management/models/item_model_most_popular.dart';
@@ -25,12 +26,9 @@ class MostPopularList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Most Popular',
-                  style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                  style: Theme.of(context).xTextTheme.body5,
                 ),
                 const SizedBox(
                   height: 10,

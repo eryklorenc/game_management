@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:game_management/app/core/theme/app_colors.dart';
+import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
 import 'package:game_management/features/auth/cubit/root_cubit.dart';
 import 'package:game_management/features/home/home_page.dart';
 
@@ -45,26 +46,20 @@ class AuthGate extends StatelessWidget {
                   EmailProviderConfiguration(),
                 ],
                 headerBuilder: (context, constraints, _) {
-                  return const SingleChildScrollView(
+                  return SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 30.0, top: 60),
+                      padding: const EdgeInsets.only(left: 30.0, top: 60),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
                             'Welcome to',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 25,
-                                color: AppColors.white),
+                            style: Theme.of(context).xTextTheme.body2,
                           ),
                           Text(
                             'GameManagement®',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 25,
-                                color: AppColors.white),
+                            style: Theme.of(context).xTextTheme.body2,
                           ),
                         ],
                       ),

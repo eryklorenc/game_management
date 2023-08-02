@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:game_management/app/core/theme/app_colors.dart';
+import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
 
 class WishListCard extends StatelessWidget {
   const WishListCard(
@@ -32,10 +32,7 @@ class WishListCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                      color: AppColors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.w600),
+                  style: Theme.of(context).xTextTheme.h0,
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/app/core/config/enums.dart';
 import 'package:game_management/app/core/theme/app_colors.dart';
+import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
 import 'package:game_management/app/core/utils/injection_container.dart';
 import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/features/home/most_popular/most_popular_list.dart';
@@ -120,12 +121,9 @@ class _WishListPageContentState extends State<WishListPageContent> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Wish List',
-                          style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600),
+                          style: Theme.of(context).xTextTheme.body1,
                         ),
                         const SizedBox(
                           height: 15,

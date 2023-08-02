@@ -75,7 +75,9 @@ class MostPopularView extends StatelessWidget {
                                     children: [
                                       Text(
                                         itemModelMostPopular.content.toString(),
-                                        style: const TextStyle(fontSize: 15),
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                        ),
                                       ),
                                     ],
                                   ),

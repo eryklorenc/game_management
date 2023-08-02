@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_management/app/core/theme/app_theme.dart';
 import 'package:game_management/features/auth/auth_gate.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: AppTheme.appDark,
       home: const AuthGate(),
     );
   }
