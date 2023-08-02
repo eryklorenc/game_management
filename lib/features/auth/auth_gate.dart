@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:game_management/app/core/injection_container.dart';
+import 'package:game_management/app/core/theme/app_colors.dart';
 import 'package:game_management/features/auth/cubit/root_cubit.dart';
 import 'package:game_management/features/home/home_page.dart';
 
@@ -11,7 +11,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<RootCubit>(),
+      create: (context) => RootCubit()..start(),
       child: BlocBuilder<RootCubit, RootState>(
         builder: (context, state) {
           final user = state.user;
@@ -20,12 +20,12 @@ class AuthGate extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 colorScheme: const ColorScheme.dark(
-                  primary: Colors.greenAccent,
+                  primary: AppColors.primary,
                 ),
                 inputDecorationTheme: InputDecorationTheme(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.greenAccent),
+                    borderSide: const BorderSide(color: AppColors.primary),
                   ),
                 ),
                 outlinedButtonTheme: OutlinedButtonThemeData(
@@ -34,9 +34,9 @@ class AuthGate extends StatelessWidget {
                       const EdgeInsets.all(24),
                     ),
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.greenAccent),
+                        MaterialStateProperty.all<Color>(AppColors.primary),
                     foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
+                        MaterialStateProperty.all<Color>(AppColors.dark),
                   ),
                 ),
               ),
@@ -57,14 +57,14 @@ class AuthGate extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 25,
-                                color: Colors.white),
+                                color: AppColors.white),
                           ),
                           Text(
                             'GameManagement®',
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 25,
-                                color: Colors.white),
+                                color: AppColors.white),
                           ),
                         ],
                       ),

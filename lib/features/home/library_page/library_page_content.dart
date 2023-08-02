@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_management/app/core/injection_container.dart';
+import 'package:game_management/app/core/theme/app_colors.dart';
+import 'package:game_management/app/core/utils/injection_container.dart';
 import 'package:game_management/features/home/library_page/game_list.dart';
 import 'cubit/library_page_cubit.dart';
 
@@ -87,7 +88,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                         decoration: const InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 2, color: Colors.greenAccent),
+                                BorderSide(width: 2, color: AppColors.primary),
                           ),
                           hintText: 'Game name',
                           filled: true,
@@ -104,7 +105,7 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                           fillColor: Colors.transparent,
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 2, color: Colors.greenAccent),
+                                BorderSide(width: 2, color: AppColors.primary),
                           ),
                           hintText: 'Finished? Not finished?',
                         ),

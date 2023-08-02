@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:game_management/app/core/enums.dart';
+import 'package:game_management/app/core/config/enums.dart';
 import 'package:game_management/models/item_model_most_popular.dart';
 import 'package:game_management/repositories/items_repository.dart';
 import 'package:injectable/injectable.dart';

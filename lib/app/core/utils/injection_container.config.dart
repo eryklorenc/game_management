@@ -4,9 +4,14 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_lambdas
+// ignore_for_file: lines_longer_than_80_chars
+// coverage:ignore-file
+
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i6;
-import 'package:game_management/app/core/injection_container.dart' as _i12;
+import 'package:game_management/app/core/utils/injection_container.dart'
+    as _i12;
 import 'package:game_management/data/remote_data_sources/items_library_remote_data_sources.dart'
     as _i3;
 import 'package:game_management/data/remote_data_sources/items_wish_list_remote_data_sources.dart'
@@ -22,10 +27,8 @@ import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.da
     as _i11;
 import 'package:game_management/repositories/items_repository.dart' as _i8;
 import 'package:get_it/get_it.dart' as _i1;
-import 'package:injectable/injectable.dart'
-    as _i2; // ignore_for_file: unnecessary_lambdas
+import 'package:injectable/injectable.dart' as _i2;
 
-// ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i1.GetIt init({

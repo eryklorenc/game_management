@@ -8,7 +8,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My Awesome App',
       theme: ThemeData.dark(),
       home: const AuthGate(),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_management/app/core/theme/app_colors.dart';
 
 class GameList extends StatelessWidget {
   const GameList(
@@ -34,7 +35,7 @@ class GameList extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                    color: Colors.greenAccent,
+                    color: AppColors.primary,
                     fontSize: 35,
                     fontWeight: FontWeight.w600),
               ),
@@ -45,7 +46,7 @@ class GameList extends StatelessWidget {
                 price,
                 style: const TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontWeight: FontWeight.w500),
               ),
             ],

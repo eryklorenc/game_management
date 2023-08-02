@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_management/app/core/enums.dart';
-import 'package:game_management/app/core/injection_container.dart';
+import 'package:game_management/app/core/config/enums.dart';
+import 'package:game_management/app/core/theme/app_colors.dart';
+import 'package:game_management/app/core/utils/injection_container.dart';
 import 'package:game_management/features/home/most_popular/cubit/most_popular_cubit.dart';
 import 'package:game_management/features/home/most_popular/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
 import 'package:game_management/features/home/wish_list/wish_list_card.dart';
+
 class WishListPageContent extends StatefulWidget {
   const WishListPageContent({
     super.key,
@@ -43,9 +45,9 @@ class _WishListPageContentState extends State<WishListPageContent> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-              Colors.white.withOpacity(0.5),
-              Colors.white.withOpacity(0.1),
-              Colors.black.withOpacity(1),
+              AppColors.white.withOpacity(0.5),
+              AppColors.white.withOpacity(0.1),
+              AppColors.dark.withOpacity(1),
             ])),
         child: ListView(
           children: [
@@ -65,9 +67,8 @@ class _WishListPageContentState extends State<WishListPageContent> {
               ),
             ),
             BlocProvider(
-              create: (context) => getIt<MostPopularCubit>(
-                 )
-                ..getItemModelMostPopular(),
+              create: (context) =>
+                  getIt<MostPopularCubit>()..getItemModelMostPopular(),
               child: BlocConsumer<MostPopularCubit, MostPopularState>(
                 listener: (context, state) {
                   if (state.status == Status.error) {
@@ -75,7 +76,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(errorMessage),
-                        backgroundColor: Colors.red,
+                        backgroundColor: AppColors.red,
                       ),
                     );
                   }
@@ -98,8 +99,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
               height: 10,
             ),
             BlocProvider(
-              create: (context) => getIt<WishListCubit>()
-                ..start(),
+              create: (context) => getIt<WishListCubit>()..start(),
               child: BlocBuilder<WishListCubit, WishListState>(
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
@@ -123,7 +123,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                         const Text(
                           'Wish List',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.white,
                               fontSize: 25,
                               fontWeight: FontWeight.w600),
                         ),
@@ -151,7 +151,9 @@ class _WishListPageContentState extends State<WishListPageContent> {
                             decoration: const InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    width: 2, color: Colors.greenAccent),
+                                  width: 2,
+                                  color: AppColors.primary,
+                                ),
                               ),
                               hintText: 'Game name',
                               filled: true,
