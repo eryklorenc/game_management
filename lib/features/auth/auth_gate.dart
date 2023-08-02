@@ -5,6 +5,7 @@ import 'package:game_management/app/core/theme/app_colors.dart';
 import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
 import 'package:game_management/features/auth/cubit/root_cubit.dart';
 import 'package:game_management/features/home/home_page.dart';
+import 'package:game_management/generated/l10n.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({Key? key}) : super(key: key);
@@ -54,11 +55,11 @@ class AuthGate extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            'Welcome to',
+                            S.of(context).welcomeTo,
                             style: Theme.of(context).xTextTheme.body2,
                           ),
                           Text(
-                            'GameManagement®',
+                            S.of(context).gameManagement,
                             style: Theme.of(context).xTextTheme.body2,
                           ),
                         ],

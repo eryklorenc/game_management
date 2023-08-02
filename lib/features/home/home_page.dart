@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:game_management/features/auth/user_profile.dart';
 import 'package:game_management/features/home/library_page/library_page_content.dart';
 import 'package:game_management/features/home/wish_list/wish_list_page_content.dart';
+import 'package:game_management/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -43,18 +44,18 @@ class _HomePageState extends State<HomePage> {
             currentIndex = newIndex;
           });
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_add),
-            label: 'Library',
+            icon: const Icon(Icons.library_add),
+            label: S.of(context).library,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            label: 'Wish List',
+            icon: const Icon(Icons.store),
+            label: S.of(context).wishList,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: const Icon(Icons.person),
+            label: S.of(context).profile,
           ),
         ],
       ),

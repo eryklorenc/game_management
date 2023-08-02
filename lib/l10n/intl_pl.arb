@@ -1,0 +1,14 @@
+{
+    "@@locale": "pl",
+    "welcomeTo": "Witaj",
+    "mostPopular": "Najbardziej popularne",
+    "gameName": "Nazwa gry",
+    "yourWishList": "Twoja lista życzeń",
+    "wishList": "Lista życzeń",
+    "unknownError": "Nieznany błąd",
+    "somethingWentWrong": "Coś poszło nie tak",
+    "library": "Biblioteka",
+    "profile": "Profil",
+    "finishedNotFinished": "Ukończona? Nieukończona",
+    "gameManagement": "GameManagement"
+}

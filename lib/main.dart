@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:game_management/app/app.dart';
 import 'package:game_management/app/core/utils/injection_container.dart';
 import 'package:game_management/firebase_options.dart';
+import 'package:intl/intl.dart';
 
 void main() async {
+  Intl.defaultLocale = 'pl';
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   await Firebase.initializeApp(

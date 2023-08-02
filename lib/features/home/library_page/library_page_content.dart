@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_management/app/core/theme/app_colors.dart';
 import 'package:game_management/app/core/utils/injection_container.dart';
 import 'package:game_management/features/home/library_page/game_list.dart';
+import 'package:game_management/generated/l10n.dart';
 import 'cubit/library_page_cubit.dart';
 
 class LibraryPageContent extends StatefulWidget {
@@ -53,8 +54,9 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
                     return Center(
-                      child:
-                          Text('Something went wrong: ${state.errorMessage}'),
+                      child: Text(
+                        '${S.of(context).somethingWentWrong} ${state.errorMessage}',
+                      ),
                     );
                   }
 
@@ -87,14 +89,14 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                         height: 10,
                       ),
                       TextField(
-                        decoration: const InputDecoration(
-                          enabledBorder: OutlineInputBorder(
+                        decoration: InputDecoration(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
                               color: AppColors.primary,
                             ),
                           ),
-                          hintText: 'Game name',
+                          hintText: S.of(context).gameName,
                           filled: true,
                           fillColor: Colors.transparent,
                         ),
@@ -104,16 +106,16 @@ class _LibraryPageContentState extends State<LibraryPageContent> {
                         height: 10,
                       ),
                       TextField(
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.transparent,
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
                               color: AppColors.primary,
                             ),
                           ),
-                          hintText: 'Finished? Not finished?',
+                          hintText: S.of(context).finishedNotFinished,
                         ),
                         controller: controllerstatus,
                       ),

@@ -1,6 +1,14 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-        "description": "The conventional newborn programmer greeting"
-    }
+    "@@locale": "en",
+    "welcomeTo": "Welcome to",
+    "mostPopular": "Most Popular",
+    "gameName": "Game name",
+    "yourWishList": "Your Wish List",
+    "wishList": "Wish List",
+    "unknownError": "Unknown error",
+    "somethingWentWrong": "Something went wrong",
+    "library": "Library",
+    "profile": "Profile",
+    "finishedNotFinished": "Finished? Not finished",
+    "gameManagement": "GameManagement"
 }

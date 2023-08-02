@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
+import 'package:game_management/gen/assets.gen.dart';
 
 class GameList extends StatelessWidget {
   const GameList(
@@ -20,8 +21,7 @@ class GameList extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: SizedBox.fromSize(
             size: const Size.fromRadius(48),
-            child: const Image(
-              image: AssetImage('assets/controller1.jpg'),
+            child: Assets.controller1.image(
               fit: BoxFit.cover,
             ),
           ),

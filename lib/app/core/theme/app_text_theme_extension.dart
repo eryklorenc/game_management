@@ -8,16 +8,11 @@ extension XTheme on ThemeData {
 class AppTextThemeExtension extends ThemeExtension<AppTextThemeExtension> {
   AppTextThemeExtension({
     required this.h0,
-    required this.h1,
-    required this.h2,
     required this.body1,
     required this.body2,
     required this.body3,
     required this.body4,
     required this.body5,
-    required this.notification,
-    required this.contact,
-    required this.date,
   });
 
   final TextStyle body1;
@@ -31,16 +26,6 @@ class AppTextThemeExtension extends ThemeExtension<AppTextThemeExtension> {
   final TextStyle body5;
 
   final TextStyle h0;
-
-  final TextStyle h1;
-
-  final TextStyle h2;
-
-  final TextStyle contact;
-
-  final TextStyle date;
-
-  final TextStyle notification;
 
   factory AppTextThemeExtension.initialize() => AppTextThemeExtension(
         body1: const TextStyle(
@@ -73,38 +58,6 @@ class AppTextThemeExtension extends ThemeExtension<AppTextThemeExtension> {
           fontSize: 23,
           fontWeight: FontWeight.w600,
         ),
-        h1: const TextStyle(
-          fontFamily: 'Ubuntu',
-          fontSize: 24,
-          height: 1,
-        ),
-        h2: const TextStyle(
-          fontFamily: 'Ubuntu',
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          height: 0.71,
-        ),
-        notification: const TextStyle(
-          fontFamily: 'Roboto',
-          fontSize: 12,
-          height: 0.76,
-          letterSpacing: 1,
-          color: Colors.white,
-        ),
-        date: const TextStyle(
-          fontFamily: 'Ubuntu',
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          height: 0.87,
-          color: Color(0xFF616161),
-        ),
-        contact: const TextStyle(
-          fontFamily: 'Ubuntu',
-          fontSize: 14,
-          height: 0.87,
-          fontWeight: FontWeight.w500,
-          color: Color(0xFF616161),
-        ),
       );
 
   @override
@@ -115,11 +68,6 @@ class AppTextThemeExtension extends ThemeExtension<AppTextThemeExtension> {
     TextStyle? body4,
     TextStyle? body5,
     TextStyle? h0,
-    TextStyle? h1,
-    TextStyle? h2,
-    TextStyle? contact,
-    TextStyle? date,
-    TextStyle? notification,
   }) {
     return AppTextThemeExtension(
       body1: body1 ?? this.body1,
@@ -128,11 +76,6 @@ class AppTextThemeExtension extends ThemeExtension<AppTextThemeExtension> {
       body4: body4 ?? this.body4,
       body5: body5 ?? this.body5,
       h0: h0 ?? this.h0,
-      h1: h1 ?? this.h1,
-      h2: h2 ?? this.h2,
-      contact: contact ?? this.contact,
-      date: date ?? this.date,
-      notification: notification ?? this.notification,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:game_management/app/core/theme/app_text_theme_extension.dart';
+import 'package:game_management/gen/assets.gen.dart';
 
 class WishListCard extends StatelessWidget {
   const WishListCard(
@@ -18,9 +19,8 @@ class WishListCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: const Image(
+            child: Assets.controller1.image(
               width: 130,
-              image: AssetImage('assets/controller1.jpg'),
             ),
           ),
           const SizedBox(

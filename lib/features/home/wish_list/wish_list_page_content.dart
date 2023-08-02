@@ -8,6 +8,7 @@ import 'package:game_management/features/home/most_popular/cubit/most_popular_cu
 import 'package:game_management/features/home/most_popular/most_popular_list.dart';
 import 'package:game_management/features/home/wish_list/cubit/wish_list_cubit.dart';
 import 'package:game_management/features/home/wish_list/wish_list_card.dart';
+import 'package:game_management/generated/l10n.dart';
 
 class WishListPageContent extends StatefulWidget {
   const WishListPageContent({
@@ -59,7 +60,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Your Wish List',
+                      S.of(context).yourWishList,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const Icon(Icons.favorite)
@@ -73,7 +74,8 @@ class _WishListPageContentState extends State<WishListPageContent> {
               child: BlocConsumer<MostPopularCubit, MostPopularState>(
                 listener: (context, state) {
                   if (state.status == Status.error) {
-                    final errorMessage = state.errorMessage ?? 'Unkown error';
+                    final errorMessage =
+                        state.errorMessage ?? S.of(context).unknownError;
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(errorMessage),
@@ -105,8 +107,9 @@ class _WishListPageContentState extends State<WishListPageContent> {
                 builder: (context, state) {
                   if (state.errorMessage.isNotEmpty) {
                     return Center(
-                      child:
-                          Text('Something went wrong: ${state.errorMessage}'),
+                      child: Text(
+                        '${S.of(context).somethingWentWrong} ${state.errorMessage}',
+                      ),
                     );
                   }
 
@@ -122,7 +125,7 @@ class _WishListPageContentState extends State<WishListPageContent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Wish List',
+                          S.of(context).wishList,
                           style: Theme.of(context).xTextTheme.body1,
                         ),
                         const SizedBox(
@@ -146,14 +149,14 @@ class _WishListPageContentState extends State<WishListPageContent> {
                           width: 270,
                           height: 50,
                           child: TextField(
-                            decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
+                            decoration: InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 2,
                                   color: AppColors.primary,
                                 ),
                               ),
-                              hintText: 'Game name',
+                              hintText: S.of(context).gameName,
                               filled: true,
                               fillColor: Colors.transparent,
                             ),
