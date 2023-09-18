@@ -33,9 +33,10 @@ class WishListCard extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                      color: AppColors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.w600),
+                    color: AppColors.white,
+                    fontSize: 23,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),

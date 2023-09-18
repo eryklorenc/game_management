@@ -21,7 +21,9 @@ class GameList extends StatelessWidget {
           child: SizedBox.fromSize(
             size: const Size.fromRadius(48),
             child: const Image(
-                image: AssetImage('assets/controller1.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/controller1.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         const SizedBox(
@@ -35,9 +37,10 @@ class GameList extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                    color: AppColors.primary,
-                    fontSize: 35,
-                    fontWeight: FontWeight.w600),
+                  color: AppColors.primary,
+                  fontSize: 35,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(
                 height: 5,
@@ -45,9 +48,10 @@ class GameList extends StatelessWidget {
               Text(
                 price,
                 style: const TextStyle(
-                    fontSize: 20,
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w500),
+                  fontSize: 20,
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),

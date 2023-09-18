@@ -21,12 +21,14 @@ class MostPopularCard extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => MostPopularView(
-                  itemModelMostPopular: itemModelMostPopular,
-                  image: image,
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MostPopularView(
+                    itemModelMostPopular: itemModelMostPopular,
+                    image: image,
+                  ),
                 ),
-              ));
+              );
             }
           },
           child: Column(

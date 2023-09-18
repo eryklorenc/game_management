@@ -52,14 +52,16 @@ class MostPopularView extends StatelessWidget {
                                   height: 40,
                                 ),
                                 Container(
-                                  decoration: BoxDecoration(boxShadow: [
-                                    BoxShadow(
-                                      color: AppColors.dark.withOpacity(.5),
-                                      offset: const Offset(0, 20),
-                                      blurRadius: 32,
-                                      spreadRadius: 16,
-                                    ),
-                                  ]),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: AppColors.dark.withOpacity(.5),
+                                        offset: const Offset(0, 20),
+                                        blurRadius: 32,
+                                        spreadRadius: 16,
+                                      ),
+                                    ],
+                                  ),
                                   child: Image(
                                     image: image,
                                     width:

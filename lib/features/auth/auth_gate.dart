@@ -62,9 +62,10 @@ class AuthGate extends StatelessWidget {
                           Text(
                             'GameManagement®',
                             style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 25,
-                                color: AppColors.white),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 25,
+                              color: AppColors.white,
+                            ),
                           ),
                         ],
                       ),

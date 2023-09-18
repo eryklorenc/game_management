@@ -12,7 +12,11 @@ class UserProfileScreen extends StatelessWidget {
         providerConfigs: const [
           EmailProviderConfiguration(),
         ],
-        actions: [SignedOutAction((context) {})],
+        actions: [
+          SignedOutAction(
+            (context) {},
+          ),
+        ],
         avatarSize: 60,
       ),
     );

@@ -28,9 +28,10 @@ class MostPopularList extends StatelessWidget {
                 const Text(
                   'Most Popular',
                   style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                    color: AppColors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
